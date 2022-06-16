@@ -6,6 +6,15 @@ import plotly.express as px
 from utils.data_loaders import *
 from utils.df_grid_builder import df_grid_builder
 
+st.set_page_config(
+     page_title="Celsius Wallet Analyzoor",
+     page_icon="🌡️",
+     layout="wide",
+     initial_sidebar_state="expanded",
+     menu_items={
+         'Article': 'https://0xrdt.notion.site/Celsius-Wallet-725174fa3c8348059dc2fa6b105ddf82'}
+ )
+
 st.title('Celsius Wallets Analysis')
 
 def daily_txs_section():
