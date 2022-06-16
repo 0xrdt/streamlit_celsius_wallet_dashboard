@@ -12,7 +12,7 @@ st.set_page_config(
      layout="wide",
      initial_sidebar_state="expanded",
      menu_items={
-         'Article': 'https://0xrdt.notion.site/Celsius-Wallet-725174fa3c8348059dc2fa6b105ddf82'}
+         'About': 'https://0xrdt.notion.site/Celsius-Wallet-725174fa3c8348059dc2fa6b105ddf82'}
  )
 
 st.title('Celsius Wallets Analysis')
