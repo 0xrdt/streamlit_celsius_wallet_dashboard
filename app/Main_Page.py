@@ -16,6 +16,7 @@ st.set_page_config(
  )
 
 st.title('Celsius Wallets Analysis')
+st.markdown("Check out the [article about this dashboard](https://0xrdt.notion.site/Celsius-Wallet-725174fa3c8348059dc2fa6b105ddf82)! ")
 
 def daily_txs_section():
 	st.header('Daily Transactions')
