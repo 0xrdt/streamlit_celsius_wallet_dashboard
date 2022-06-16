@@ -126,7 +126,7 @@ def token_transfers_section():
 	fig.update_layout(height=500)
 	st.write(fig)
 
-	should_show = st.checkbox('Show top 100 transfers')
+	should_show = st.checkbox('Show top 100 ETH transfers')
 	if should_show:
 		token_transfers = load_token_transfers()
 		token_transfers = token_transfers.sort_values(['TRANSFER_VOLUME_USD'], ascending=False)
@@ -154,7 +154,7 @@ def eth_transfers_section():
 	fig.update_layout(height=500)
 	st.write(fig)
 
-	should_show = st.checkbox('Show top 100 transfers')
+	should_show = st.checkbox('Show top 100 token transfers')
 	if should_show:
 		transfers = load_transfers()
 		transfers = transfers.sort_values(['TRANSFER_VOLUME_USD'], ascending=False)
