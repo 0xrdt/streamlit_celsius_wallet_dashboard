@@ -1,0 +1,6 @@
+wheel
+setuptools
+streamlit
+plotly
+pandas
+awswrangler
