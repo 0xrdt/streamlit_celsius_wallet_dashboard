@@ -43,12 +43,14 @@ def load_balances():
 
 @st.cache
 def load_celsius_accounts():
-	celsius_accounts = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8daf6411-fd29-4737-961c-71b08b7ffe30/data/latest")
+	#celsius_accounts = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8daf6411-fd29-4737-961c-71b08b7ffe30/data/latest")
+	celsius_accounts = pd.read_json("data/celsius_accounts.json")
 	return celsius_accounts
 
 @st.cache
 def load_token_transfers_daily():
-	token_transfers_daily = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/a0f06d3b-01c8-4745-baa2-5f122d5e1c11/data/latest")
+	#token_transfers_daily = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/a0f06d3b-01c8-4745-baa2-5f122d5e1c11/data/latest")
+	token_transfers_daily = pd.read_json("data/token_transfers_daily.json")
 	token_transfers_daily['day'] = pd.to_datetime(token_transfers_daily['day'])
 	token_transfers_daily = token_transfers_daily.sort_values(by='day')
 	token_transfers_daily = token_transfers_daily.dropna()
@@ -56,7 +58,8 @@ def load_token_transfers_daily():
 
 @st.cache
 def load_transfers_daily():
-	transfers_daily = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8476a152-0727-4866-9e21-67286bd1c1ad/data/latest")
+	#transfers_daily = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8476a152-0727-4866-9e21-67286bd1c1ad/data/latest")
+	transfers_daily = pd.read_json("data/transfers_daily.json")
 	transfers_daily['day'] = pd.to_datetime(transfers_daily['day'])
 	transfers_daily = transfers_daily.sort_values(by='day')
 	transfers_daily = transfers_daily.dropna()
