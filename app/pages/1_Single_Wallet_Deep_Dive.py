@@ -84,7 +84,7 @@ def token_counterparties_section():
 		tmp = outgoing.groupby("TO_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
 		df_grid_builder(tmp)
 		st.text("Outgoing")
-		incoming.groupby("FROM_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
+		tmp = incoming.groupby("FROM_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
 		df_grid_builder(tmp)
 
 		st.subheader("Transfers Aggregated by Token (ERC-20 Transfer)")
