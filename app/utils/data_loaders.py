@@ -4,7 +4,6 @@ import requests
 import json
 import time
 import os
-# API_KEY = "48bd4a71-3872-4b90-a0a0-a8a879cfb113"
 
 st.write(
     "Has environment variables been set:",
