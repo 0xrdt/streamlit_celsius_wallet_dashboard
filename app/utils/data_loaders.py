@@ -354,7 +354,7 @@ WHERE 1=1
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP)
 )
-SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 10000"""
+SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 1\0000"""
 # st.code(transferes2_sql)
 
 celsius_accounts_sql = """with celsius_addr as (
