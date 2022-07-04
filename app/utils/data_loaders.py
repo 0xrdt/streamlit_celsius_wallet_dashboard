@@ -159,7 +159,7 @@ WHERE 1=1
 GROUP BY 
   ORIGIN_FROM_ADDRESS,ORIGIN_TO_ADDRESS,ETH_FROM_ADDRESS,ETH_TO_ADDRESS,FROM_LABEL_TYPE,FROM_LABEL_SUBTYPE,FROM_ADDRESS_NAME,FROM_PROJECT_NAME,TO_LABEL_TYPE,TO_LABEL_SUBTYPE,TO_ADDRESS_NAME,TO_PROJECT_NAME
 )
-SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 100000
+SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 10000
 """
 # st.code(transfers_sql)
 
@@ -198,7 +198,7 @@ WHERE 1=1
   	AND AMOUNT_USD is not null
 GROUP BY DATE_TRUNC('day', BALANCE_DATE),SYMBOL,USER_ADDRESS,CONTRACT_ADDRESS,fal.LABEL_TYPE,fal.LABEL_SUBTYPE,fal.ADDRESS_NAME,fal.PROJECT_NAME
 HAVING total_balance_usd>25
-ORDER BY total_balance_usd DESC LIMIT 100000
+ORDER BY total_balance_usd DESC LIMIT 10000
 """
 # st.code(balances_sql)
 
@@ -317,7 +317,7 @@ WHERE 1=1
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP),
   CONTRACT_ADDRESS,SYMBOL
-ORDER BY transfer_volume_usd DESC LIMIT 100000"""
+ORDER BY transfer_volume_usd DESC LIMIT 10000"""
 # st.code(token_transfers2_sql)
 
 transferes2_sql = """with celsius_addr as (
@@ -354,7 +354,7 @@ WHERE 1=1
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP)
 )
-SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 100000"""
+SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 1\0000"""
 # st.code(transferes2_sql)
 
 celsius_accounts_sql = """with celsius_addr as (
