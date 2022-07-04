@@ -197,7 +197,7 @@ WHERE 1=1
   	AND BALANCE_DATE>current_timestamp()-interval'70 days'
   	AND AMOUNT_USD is not null
 GROUP BY DATE_TRUNC('day', BALANCE_DATE),SYMBOL,USER_ADDRESS,CONTRACT_ADDRESS,fal.LABEL_TYPE,fal.LABEL_SUBTYPE,fal.ADDRESS_NAME,fal.PROJECT_NAME
-HAVING total_balance_usd>25
+HAVING total_balance_usd>25 and total_balance_usd<2500000000000
 ORDER BY total_balance_usd DESC LIMIT 10000
 """
 # st.code(balances_sql)
