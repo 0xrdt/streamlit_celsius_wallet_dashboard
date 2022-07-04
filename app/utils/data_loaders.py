@@ -4,7 +4,6 @@ import requests
 import json
 import time
 import os
-# API_KEY = "48bd4a71-3872-4b90-a0a0-a8a879cfb113"
 
 st.write(
     "Has environment variables been set:",
@@ -421,33 +420,33 @@ def load_flip_df(SQL_QUERY, API_KEY):
 # transferes2_sql
 
 
-@st.cache
+# @st.cache
 def load_token_transfers():
 	#token_transfers = pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/ed9ec9a3-5465-48a5-b9a2-fd43f17b9b46/data/latest')
 	token_transfers = load_flip_df(SQL_QUERY=token_transfers_sql, API_KEY=API_KEY)
 	return token_transfers
 
-@st.cache
+# @st.cache
 def load_transfers():
 	#transfers = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/06fbdc78-926e-473a-9a24-ab6076003601/data/latest")
 	transfers = load_flip_df(SQL_QUERY=transfers_sql, API_KEY=API_KEY)
 
 	return transfers
 
-@st.cache
+# @st.cache
 def load_approvals():
 	#approvals = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/afc06e0c-768b-4228-bee1-7ae5a56e173e/data/latest")
 	approvals = load_flip_df(SQL_QUERY=approvals_sql, API_KEY=API_KEY)
 	return approvals
 
-@st.cache
+# @st.cache
 def load_txs():
 	#txs = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8b31c403-abdc-4fcf-8aba-46c7b7812a1f/data/latest")
 	txs = load_flip_df(SQL_QUERY=txs_sql, API_KEY=API_KEY)
 
 	return txs
 
-@st.cache
+# @st.cache
 def load_daily_txs():
 	#daily_txs = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/9312140e-c66d-4f74-995f-a66c4197a493/data/latest")
 	daily_txs = load_flip_df(SQL_QUERY=daily_txs_sql, API_KEY=API_KEY)
@@ -455,7 +454,7 @@ def load_daily_txs():
 	daily_txs = daily_txs.sort_values(by='day')
 	return daily_txs
 
-@st.cache
+# @st.cache
 def load_balances():
 	#balances = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/f8f8f8f8-f8f8-f8f8-f8f8-f8f8f8f8f8f8/data/latest")
 	balances =  load_flip_df(SQL_QUERY=balances_sql, API_KEY=API_KEY)
@@ -463,14 +462,14 @@ def load_balances():
 	balances = balances.sort_values(by='day')
 	return balances
 
-@st.cache
+# @st.cache
 def load_celsius_accounts():
 	#celsius_accounts = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8daf6411-fd29-4737-961c-71b08b7ffe30/data/latest")
 	celsius_accounts = load_flip_df(SQL_QUERY=celsius_accounts_sql, API_KEY=API_KEY)
 
 	return celsius_accounts
 
-@st.cache
+# @st.cache
 def load_token_transfers_daily():
 	#token_transfers_daily = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/a0f06d3b-01c8-4745-baa2-5f122d5e1c11/data/latest")
 	token_transfers_daily = load_flip_df(SQL_QUERY=token_transfers2_sql, API_KEY=API_KEY)
@@ -479,7 +478,7 @@ def load_token_transfers_daily():
 	token_transfers_daily = token_transfers_daily.dropna()
 	return token_transfers_daily
 
-@st.cache
+# @st.cache
 def load_transfers_daily():
 	#transfers_daily = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8476a152-0727-4866-9e21-67286bd1c1ad/data/latest")
 	transfers_daily = load_flip_df(SQL_QUERY=transferes2_sql, API_KEY=API_KEY)
