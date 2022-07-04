@@ -4,6 +4,7 @@ import requests
 import json
 import time
 import os
+# API_KEY = "48bd4a71-3872-4b90-a0a0-a8a879cfb113"
 
 st.write(
     "Has environment variables been set:",
@@ -24,7 +25,6 @@ SELECT
     AVG(TOKEN_PRICE) as avg_token_price,
     SUM(AMOUNT) as transfer_volume,
     SUM(AMOUNT_USD) as transfer_volume_usd,
-  	-- DATE_TRUNC('day', BLOCK_TIMESTAMP) as "day",
     CONTRACT_ADDRESS,
     SYMBOL,
   	tt.FROM_ADDRESS,
@@ -58,10 +58,8 @@ LEFT JOIN (
   ) as tal ON tt.to_address=tal.TO_ADDRESS
 WHERE 1=1
 	AND ((tt.from_address IN (select address from celsius_addr)) OR (tt.to_address IN (select address from celsius_addr)))
-  	-- AND block_timestamp>'2022-05-01'
   	AND AMOUNT_USD IS NOT null
 GROUP BY 
-  -- DATE_TRUNC('day', BLOCK_TIMESTAMP),
   CONTRACT_ADDRESS,SYMBOL,ORIGIN_FROM_ADDRESS,ORIGIN_TO_ADDRESS,tt.FROM_ADDRESS,tt.TO_ADDRESS,FROM_LABEL_TYPE,FROM_LABEL_SUBTYPE,FROM_ADDRESS_NAME,FROM_PROJECT_NAME,TO_LABEL_TYPE,TO_LABEL_SUBTYPE,TO_ADDRESS_NAME,TO_PROJECT_NAME
 ORDER BY transfer_volume_usd DESC LIMIT 100000
 """
@@ -125,7 +123,6 @@ SELECT
     COUNT(TX_HASH) AS transfer_count,
     SUM(AMOUNT) as transfer_volume,
     SUM(AMOUNT_USD) as transfer_volume_usd,
-    -- DATE_TRUNC('day', BLOCK_TIMESTAMP) AS "day",
     ORIGIN_FROM_ADDRESS,
     ORIGIN_TO_ADDRESS,
     ETH_FROM_ADDRESS,
@@ -160,11 +157,8 @@ LEFT JOIN (
 WHERE 1=1
 	AND ((tt.ETH_FROM_ADDRESS IN (select address from celsius_addr)) OR (tt.ETH_TO_ADDRESS IN (select address from celsius_addr)))
   	AND AMOUNT_USD is not null
-  	-- AND block_timestamp>'2021-06-01'
 GROUP BY 
-  -- DATE_TRUNC('day', BLOCK_TIMESTAMP),
   ORIGIN_FROM_ADDRESS,ORIGIN_TO_ADDRESS,ETH_FROM_ADDRESS,ETH_TO_ADDRESS,FROM_LABEL_TYPE,FROM_LABEL_SUBTYPE,FROM_ADDRESS_NAME,FROM_PROJECT_NAME,TO_LABEL_TYPE,TO_LABEL_SUBTYPE,TO_ADDRESS_NAME,TO_PROJECT_NAME
--- HAVING transfer_volume_usd>500
 )
 SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 100000
 """
@@ -215,7 +209,6 @@ txs_sql = """with celsius_addr as (
 )
 
 SELECT 
-  	-- DATE_TRUNC('day', block_timestamp) as "day",
   	ft.FROM_ADDRESS,
   	ft.TO_ADDRESS,
     FROM_LABEL_TYPE,
@@ -249,9 +242,7 @@ LEFT JOIN (
 WHERE 1=1
   	AND STATUS='SUCCESS'
 	AND ((ft.from_address IN (select address from celsius_addr)) OR (ft.to_address IN (select address from celsius_addr)))
-  	-- AND block_timestamp>'2021-06-01'
 GROUP BY 
-  -- DATE_TRUNC('day', block_timestamp),
   ft.FROM_ADDRESS,ft.TO_ADDRESS,FROM_LABEL_TYPE,FROM_LABEL_SUBTYPE,FROM_ADDRESS_NAME,FROM_PROJECT_NAME,TO_LABEL_TYPE,TO_LABEL_SUBTYPE,TO_ADDRESS_NAME,TO_PROJECT_NAME
 HAVING num_txs>5"""
 
@@ -349,7 +340,6 @@ WHERE 1=1
   	AND block_timestamp>current_timestamp()-interval'180 days'
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP)
--- HAVING transfer_volume_usd>500
 UNION ALL
 SELECT 
     COUNT(TX_HASH) AS transfer_count,
@@ -364,7 +354,6 @@ WHERE 1=1
   	AND block_timestamp>current_timestamp()-interval'180 days'
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP)
--- HAVING transfer_volume_usd>500
 )
 SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 100000"""
 # st.code(transferes2_sql)
