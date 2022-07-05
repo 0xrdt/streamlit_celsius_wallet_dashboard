@@ -4,15 +4,15 @@ import requests
 import json
 import time
 import os
-API_KEY = "48bd4a71-3872-4b90-a0a0-a8a879cfb113"
+import dotenv
 
-# st.write(
-#     "Has environment variables been set:",
-#     os.environ["API_KEY"] == st.secrets["API_KEY"],
-# )
+st.write(
+    "Has environment variables been set:",
+    os.environ["API_KEY"] == st.secrets["API_KEY"],
+)
 
-# API_KEY = os.environ["API_KEY"]
-# API_KEY = st.secrets["API_KEY"]
+API_KEY = os.environ["API_KEY"]
+API_KEY = st.secrets["API_KEY"]
 
 token_transfers_sql = """
 with celsius_addr as (
@@ -61,7 +61,7 @@ WHERE 1=1
   	AND AMOUNT_USD IS NOT null
 GROUP BY 
   CONTRACT_ADDRESS,SYMBOL,ORIGIN_FROM_ADDRESS,ORIGIN_TO_ADDRESS,tt.FROM_ADDRESS,tt.TO_ADDRESS,FROM_LABEL_TYPE,FROM_LABEL_SUBTYPE,FROM_ADDRESS_NAME,FROM_PROJECT_NAME,TO_LABEL_TYPE,TO_LABEL_SUBTYPE,TO_ADDRESS_NAME,TO_PROJECT_NAME
-ORDER BY transfer_volume_usd DESC LIMIT 10000
+ORDER BY transfer_volume_usd DESC LIMIT 80000
 """
 # st.code(token_transfers_sql)
 
@@ -318,7 +318,7 @@ WHERE 1=1
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP),
   CONTRACT_ADDRESS,SYMBOL
-ORDER BY transfer_volume_usd DESC LIMIT 10000"""
+ORDER BY transfer_volume_usd DESC LIMIT 50000"""
 # st.code(token_transfers2_sql)
 
 transferes2_sql = """with celsius_addr as (
@@ -355,7 +355,7 @@ WHERE 1=1
 GROUP BY 
   DATE_TRUNC('day', BLOCK_TIMESTAMP)
 )
-SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 1\0000"""
+SELECT * FROM TMP ORDER BY transfer_volume_usd DESC LIMIT 50000"""
 # st.code(transferes2_sql)
 
 celsius_accounts_sql = """with celsius_addr as (
@@ -467,7 +467,6 @@ def load_balances():
 def load_celsius_accounts():
 	#celsius_accounts = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/8daf6411-fd29-4737-961c-71b08b7ffe30/data/latest")
 	celsius_accounts = load_flip_df(SQL_QUERY=celsius_accounts_sql, API_KEY=API_KEY)
-
 	return celsius_accounts
 
 @st.cache
