@@ -5,12 +5,12 @@ from utils.data_loaders import *
 from utils.df_grid_builder import df_grid_builder
 
 st.title("Wallet Profiler")
-transfers = load_transfers()
-transfers_x = transfers.set_index("ORIGIN_TO_ADDRESS")
+transferz = load_transfers()
+transfers_x = transferz.set_index("ORIGIN_TO_ADDRESS")
 transfers_x = pd.DataFrame(transfers_x.index.unique())
 
 # st.write(transfers_x)
-transfers_y = transfers.set_index("ORIGIN_FROM_ADDRESS")
+transfers_y = transferz.set_index("ORIGIN_FROM_ADDRESS")
 transfers_y = pd.DataFrame(transfers_y.index.unique())
 # st.write(transfers_y)
 merged_Frame = pd.merge(transfers_y, transfers_x, right_on = "ORIGIN_TO_ADDRESS", left_on= "ORIGIN_FROM_ADDRESS" , how = 'outer')
@@ -65,9 +65,9 @@ def eth_counterparties_section():
 		# st.write(outgoing)
 		# st.write(incoming)
 		# incoming = incoming.sort_values(['TRANSFER_VOLUME_USD'], ascending=False).reset_index(drop=True)
-		incoming = incoming[['FROM_ADDRESS_NAME', 'FROM_PROJECT_NAME', 'TRANSFER_COUNT', 'TRANSFER_VOLUME_USD', 'ORIGIN_FROM_ADDRESS']]
+		incoming = incoming[['FROM_ADDRESS_NAME', 'FROM_PROJECT_NAME', 'TRANSFER_COUNT', 'TRANSFER_VOLUME_USD']]
 		# outgoing = outgoing.sort_values(['TRANSFER_VOLUME_USD'], ascending=False).reset_index(drop=True)
-		outgoing = outgoing[['TO_ADDRESS_NAME', 'TO_PROJECT_NAME', 'TRANSFER_COUNT', 'TRANSFER_VOLUME_USD', 'ORIGIN_TO_ADDRESS']]
+		outgoing = outgoing[['TO_ADDRESS_NAME', 'TO_PROJECT_NAME', 'TRANSFER_COUNT', 'TRANSFER_VOLUME_USD']]
 
 		col1, col2 = st.columns(2)
 		col1.metric('Total Incoming Transfers Count', value=incoming['TRANSFER_COUNT'].sum())
