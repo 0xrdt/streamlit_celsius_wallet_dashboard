@@ -173,7 +173,7 @@ def eth_transfers_section():
 		df_grid_builder(df)
 
 
-#st.sidebar.title('Choose what you want to see')
+st.sidebar.title('Choose what you want to see')
 selected_sections = st.sidebar.multiselect('Choose the sections you want to see:', ['Transactions', 'Balances', 'ETH Transfers', 'ERC-20 Transfers'], default=['Balances'])
 
 if 'Transactions' in selected_sections:

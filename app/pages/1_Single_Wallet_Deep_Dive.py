@@ -23,7 +23,8 @@ def eth_counterparties_section():
 	transfers = load_transfers()
 	outgoing = transfers[transfers['ORIGIN_FROM_ADDRESS']==wallet_address]
 	incoming = transfers[transfers['ORIGIN_TO_ADDRESS']==wallet_address]
-
+	st.write(outgoing)
+	st.write(incoming)
 	incoming = incoming.sort_values(['TRANSFER_VOLUME_USD'], ascending=False).reset_index(drop=True)
 	incoming = incoming[['FROM_ADDRESS_NAME', 'FROM_PROJECT_NAME', 'TRANSFER_COUNT', 'TRANSFER_VOLUME_USD', 'ORIGIN_FROM_ADDRESS']]
 	outgoing = outgoing.sort_values(['TRANSFER_VOLUME_USD'], ascending=False).reset_index(drop=True)
