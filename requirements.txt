@@ -2,3 +2,5 @@ wheel
 streamlit
 streamlit-aggrid
 plotly
+pandas
+pipreqs
