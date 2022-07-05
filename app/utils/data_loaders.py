@@ -5,12 +5,7 @@ import json
 import time
 import os
 
-st.write(
-    "Has environment variables been set:",
-    os.environ["API_KEY"] == st.secrets["API_KEY"],
-)
 
-API_KEY = os.environ["API_KEY"]
 API_KEY = st.secrets["API_KEY"]
 
 token_transfers_sql = """
