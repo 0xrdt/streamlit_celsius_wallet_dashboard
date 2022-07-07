@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 
 from utils.data_loaders import *
-from utils.df_grid_builder import df_grid_builder
+# from utils.df_grid_builder import df_grid_builder
 
 st.title("Wallet Profiler")
 
@@ -39,19 +39,19 @@ def eth_counterparties_section():
 	if show_top_interacting_wallets:
 		st.subheader("Top-Interacting Wallets (ETH Transfer)")
 		st.text("Incoming")
-		df_grid_builder(incoming)
+		st.write(incoming)
 		st.text("Outgoing")
-		df_grid_builder(outgoing)
+		st.write(outgoing)
 	
 	show_agg_transfers = st.checkbox("Show aggregated transfers (ETH transfer)")
 	if show_agg_transfers:
 		st.subheader("Transfers Aggregated by Wallet Label (ETH Transfer)")
 		st.text("Incoming")
 		tmp = outgoing.groupby("TO_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
-		df_grid_builder(tmp)
+		st.write(tmp)
 		st.text("Outgoing")
 		incoming.groupby("FROM_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
-		df_grid_builder(tmp)
+		st.write(tmp)
 
 def token_counterparties_section():
 	st.header("Token Counterparties")
@@ -73,29 +73,29 @@ def token_counterparties_section():
 	if show_top_interacting_wallets:
 		st.subheader("Top-Interacting Wallets (ERC-20 Transfer)")
 		st.text("Incoming")
-		df_grid_builder(incoming)
+		st.write(incoming)
 		st.text("Outgoing")
-		df_grid_builder(outgoing)
+		st.write(outgoing)
 
 	show_agg_transfers = st.checkbox("Show aggregated transfers (ERC-20 transfer)")
 	if show_agg_transfers:
 		st.subheader("Transfers Aggregated by Wallet Label (ERC-20 Transfer)")
 		st.text("Incoming")
 		tmp = outgoing.groupby("TO_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
-		df_grid_builder(tmp)
+		st.write(tmp)
 		st.text("Outgoing")
 		tmp = incoming.groupby("FROM_ADDRESS_NAME").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
-		df_grid_builder(tmp)
+		st.write(tmp)
 
 		st.subheader("Transfers Aggregated by Token (ERC-20 Transfer)")
 		st.text("Incoming")
 		incoming_agg_symbol = incoming.groupby("SYMBOL").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
 		incoming_agg_symbol['TRANSFER_VOLUME_USD_PCT'] = 100*incoming_agg_symbol['TRANSFER_VOLUME_USD']/incoming_agg_symbol['TRANSFER_VOLUME_USD'].sum()
-		df_grid_builder(incoming_agg_symbol)
+		st.write(incoming_agg_symbol)
 		st.text("Outgoing")
 		outgoing_agg_symbol = outgoing.groupby("SYMBOL").sum().sort_values(by=['TRANSFER_VOLUME_USD'], ascending=False)
 		outgoing_agg_symbol['TRANSFER_VOLUME_USD_PCT'] = 100*outgoing_agg_symbol['TRANSFER_VOLUME_USD']/outgoing_agg_symbol['TRANSFER_VOLUME_USD'].sum()
-		df_grid_builder(outgoing_agg_symbol)
+		st.write(outgoing_agg_symbol)
 
 wallet_address = st.selectbox("Choose a wallet", list(load_celsius_accounts()['ADDRESS'].unique()))
 wallet_balance_section()
